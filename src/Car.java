@@ -1,12 +1,11 @@
-public class Car extends Vehicle {
-    int numberOfDoors;
-
-    public Car(int numberOfDoors) {
-        this.numberOfDoors = numberOfDoors;
+public class Car implements Vehicle{
+    @Override
+    public void start() {
+        System.out.println("Машина поехала!");
     }
 
     @Override
-    public String getDescription() {
-        return super.getDescription() +" Колличество дверей " + numberOfDoors;
+    public void stop() {
+        System.out.println("Машина остановилась!");
     }
 }
