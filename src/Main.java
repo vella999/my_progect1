@@ -1,35 +1,59 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-Garage garage = new Garage();
-Vehicle car = new Car();
-Vehicle bicycle = new Bicycle();
-Vehicle boat = new Boat();
-garage.operateVehicle(car);
-garage.operateVehicle(bicycle);
-garage.operateVehicle(boat);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите колличество чисел в массиве!");
+        int count = scanner.nextInt();
+        int[] array = new int[count];
+        int porog;
+        System.out.println("Введенное колличество чисел: " + count);
+        System.out.println("Введите числа кторые будут в массиве!");
+        for (int i = 0; i < count; i++) {
+            int namber = scanner.nextInt();
+            array[i] = namber;
+        }
+        System.out.println("Введеные числа: " + Arrays.toString(array));
+        System.out.println("Выберите вариант: Сортировка 0, Фильтр 1");
+        int v = scanner.nextInt();
+        if (v > 1) {
+            System.out.println("Вы ввели неверное значение!");
+        }
+        if (v == 0) {
+            Arrays.sort(array);
+            System.out.println("Отсортированный массив введеных чисел без порога: " + Arrays.toString(array));
+        }
+        if (v == 1) {
+            System.out.println("Введите порог для фильтра, который оставит только те числа, которые больше заданного значения");
+            porog = scanner.nextInt();
+            int tr = porog;
+            filter(array, tr);
+            System.out.println("Ваш отфильтрованный массив по введенному порогу: "+ Arrays.toString(filter(array, tr)));
+        }
+
     }
-}
-//Задача: Разработка системы для работы с транспортными средствами
-//Условие:
-//Создайте интерфейс Vehicle, который будет описывать общие методы для всех транспортных средств:
-//start() — метод для запуска транспортного средства.
-//stop() — метод для остановки транспортного средства.
-//
-//Затем создайте несколько классов, которые реализуют этот интерфейс:
-//1. Car — класс для автомобиля.
-//
-//2. Bicycle — класс для велосипеда.
-//
-//3. Boat — класс для лодки.
-//
-//Каждый класс должен реализовать методы интерфейса Vehicle:
-//В методе start() выводите на экран уникальное сообщение для каждого типа транспорта (например, "Автомобиль заводится").
-//В методе stop() выводите сообщение о том, что транспорт остановлен.
-//
-//Также создайте класс Garage, в котором будет метод operateVehicle(Vehicle vehicle). Этот метод принимает объект, реализующий интерфейс Vehicle, и вызывает у него методы start() и stop().
-//Требования:
-//1. Реализуйте интерфейс Vehicle и несколько классов для разных типов транспортных средств.
-//
-//2. В классе Garage используйте полиморфизм для работы с любым типом транспорта через метод operateVehicle().
-//
-//3. Продемонстрируйте работу программы, создав экземпляры каждого вида транспорта и передав их в метод operateVehicle().
+
+
+    public static int[] filter(int[] array, int threshold) {
+        int count = 0;
+        for (int number : array) {
+            if (number > threshold) {
+                count++;
+            }
+        }
+
+        int[] filteredArray = new int[count];
+        int index = 0;
+        for (int number : array) {
+            if (number > threshold) {
+                filteredArray[index++] = number;
+            }
+        }
+        return filteredArray;
+    }
+
+    }
+
+
+
